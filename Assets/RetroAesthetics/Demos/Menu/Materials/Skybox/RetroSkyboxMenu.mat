@@ -4,13 +4,15 @@
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: RetroSkyboxMenu
   m_Shader: {fileID: 4800000, guid: dfa17a30b23e94b049ffccdb334d21bc, type: 3}
-  m_ShaderKeywords: _EMISSION
+  m_ShaderKeywords: _EMISSION _SUNENABLED_ON
   m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
@@ -18,6 +20,10 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _CubemapTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -57,17 +63,18 @@ Material:
     - _Border: 0.5
     - _BottomSpeed: 5
     - _BumpScale: 1
+    - _CubemapEnabled: 0
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
-    - _DirectionPitch: 63
-    - _DirectionYaw: 47
+    - _DirectionPitch: 77
+    - _DirectionYaw: 29
     - _DstBlend: 0
-    - _Exponent: 1
-    - _Gain: 1.5
+    - _Exponent: 1.27
+    - _Gain: 1.64
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _Intensity: 0.38
+    - _Intensity: 0.47
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -75,30 +82,31 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _StripesDistance: 0.0168
-    - _StripesExponent1: 3.24
+    - _StripesDistance: 0.009
+    - _StripesExponent1: 3.26
     - _StripesExponent2: 4.58
-    - _StripesHeight: 0.09
+    - _StripesHeight: 0.5
     - _StripesSpeed: 0.25
-    - _StripesWidth: 0.003
-    - _SunEnabled: 0
-    - _SunPitch: 103
-    - _SunSize: 0.15
+    - _StripesWidth: 0.0022
+    - _SunEnabled: 1
+    - _SunExponent: 5.3
+    - _SunPitch: 76
+    - _SunSize: 0.0068
     - _SunYaw: 180
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Color1: {r: 0, g: 0, b: 0, a: 0}
-    - _Color2: {r: 0.25882354, g: 0.49803925, b: 0.61960787, a: 0}
+    - _Color2: {r: 0.2897371, g: 0.22745098, b: 0.3764706, a: 0}
     - _ColorBg: {r: 0.97, g: 0.67, b: 0.51, a: 0}
     - _ColorGround1: {r: 0, g: 0.7, b: 0.74, a: 0}
     - _ColorGround2: {r: 0, g: 0.6, b: 0.74, a: 0}
     - _ColorStripe: {r: 0, g: 0.7, b: 0.74, a: 0}
     - _ColorSun: {r: 0.97, g: 0.67, b: 0.51, a: 0}
-    - _ColorSun1: {r: 1, g: 1, b: 1, a: 0}
-    - _ColorSun2: {r: 0.6985294, g: 0.10786118, b: 0.6333519, a: 0}
-    - _Direction: {r: 0.65164095, g: 0.45399052, b: 0.607665, a: 0}
+    - _ColorSun1: {r: 0.81960785, g: 0, b: 0.7978998, a: 0}
+    - _ColorSun2: {r: 0.120120525, g: 1, b: 0, a: 0}
+    - _Direction: {r: 0.47238398, g: 0.22495104, b: 0.85220325, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _SunDirection: {r: -0.00000008518214, g: -0.224951, b: -0.97437006, a: 0}
-    - _SunDirectionP: {r: 0.000000019665844, g: -0.97437006, b: 0.22495104, a: 0}
+    - _SunDirection: {r: -0.00000008482595, g: 0.2419219, b: -0.9702957, a: 0}
+    - _SunDirectionP: {r: -0.00000002114948, g: -0.9702957, b: -0.24192186, a: 0}
