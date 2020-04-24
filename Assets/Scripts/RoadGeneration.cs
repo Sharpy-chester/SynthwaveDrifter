@@ -38,7 +38,7 @@ public class RoadGeneration : MonoBehaviour
         //could set car as child of latest road piece
         //if name is left, go left?
         // if (carTrans.localPosition.z > latestRoadEnd.localPosition.z)
-        if (carTrans.localPosition.z > latestRoadEnd.localPosition.z)
+        if (carTrans.localPosition.z > latestRoadEnd.localPosition.x)
         {
             Vector3 spawnPos = new Vector3(0, 0, 0);
             GameObject newRoad = Instantiate(roadTypes[Random.Range(0, 2)]);
