@@ -713,10 +713,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 20
+  laneChangeSpeed: 0.05
   lane: 1
   isAlive: 1
   laneDist: 4
   ui: {fileID: 1482773851}
+  left: 0
+  right: 0
+  gotohere: 0
+  cooldownMax: 0.35
 --- !u!1 &1002741404
 GameObject:
   m_ObjectHideFlags: 0
