@@ -78,5 +78,10 @@ public class BtecCarController : MonoBehaviour
             isAlive = false;
             ui.GameOver();
         }
+        if (col.gameObject.name == "CassetteTape(Clone)")
+        {
+            Destroy(col.gameObject);
+        }
+
     }
 }

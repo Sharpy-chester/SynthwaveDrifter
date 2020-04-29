@@ -18,8 +18,10 @@ public class RoadGeneration : MonoBehaviour
     public Transform rot;
     public GameObject ObstaclePrefab;
     Vector3 obsticlePosVec3 = new Vector3(-6.25f, -1.725f, 2.8f);
+    float[] obsticlePos = new float[] { -6.25f, -1.725f, 2.8f };
     public float obsticleHeight = 0.55f;
     public BtecCarController carController;
+    public GameObject cassManager;
 
     void Awake()
     {
@@ -73,40 +75,33 @@ public class RoadGeneration : MonoBehaviour
         while (randyAndy2 == randyAndy)
         {
             int randyAndy3 = Random.Range(0, 3);
-            if (randyAndy3 == randyAndy2)
-            {
-
-            }
-            else
+            if (randyAndy3 != randyAndy)
             {
                 randyAndy2 = randyAndy3;
             }
+
         }
 
-
-        print(randyAndy2);
-        print(randyAndy);
-
-
-        if (randyAndy == 0 || randyAndy2 == 0)
+        for (int i = 0; i < 3; i++)
         {
-            GameObject obstacle = Instantiate(ObstaclePrefab, new Vector3(obsticlePosVec3.x, obsticleHeight, 0), ObstaclePrefab.transform.rotation);
-            obstacle.transform.parent = end;
-            obstacle.transform.localPosition = new Vector3(obstacle.transform.localPosition.x, obstacle.transform.localPosition.y, 0);
-        }
-        if (randyAndy == 1 || randyAndy2 == 1)
-        {
-            GameObject obstacle = Instantiate(ObstaclePrefab, new Vector3(obsticlePosVec3.y, obsticleHeight, 0), ObstaclePrefab.transform.rotation);
-            obstacle.transform.parent = end;
-            obstacle.transform.localPosition = new Vector3(obstacle.transform.localPosition.x, obstacle.transform.localPosition.y, 0);
-        }
-        if (randyAndy == 2 || randyAndy2 == 2)
-        {
-            GameObject obstacle = Instantiate(ObstaclePrefab, new Vector3(obsticlePosVec3.z, obsticleHeight, 0), ObstaclePrefab.transform.rotation);
-            obstacle.transform.parent = end;
-            obstacle.transform.localPosition = new Vector3(obstacle.transform.localPosition.x, obstacle.transform.localPosition.y, 0);
-        }
+            if (randyAndy == i || randyAndy2 == i)
+            {
+                GameObject obstacle = Instantiate(ObstaclePrefab, new Vector3(obsticlePos[i], obsticleHeight, 0), ObstaclePrefab.transform.rotation);
+                obstacle.transform.parent = end;
+                obstacle.transform.localPosition = new Vector3(obstacle.transform.localPosition.x, obstacle.transform.localPosition.y, 0);
+            }
 
+            if (randyAndy != i && randyAndy2 != i)
+            {
+
+                GameObject cass = Instantiate(cassManager, new Vector3(0, 1.5f, 0), cassManager.transform.rotation);
+                print(cass.transform.position);
+                cass.transform.parent = end;
+                cass.transform.localPosition = new Vector3(2.1f * i - 2.1f, cass.transform.localPosition.y, 0);
+                cass.transform.parent = latestRoad.transform;
+                print(cass.transform.position);
+            }
+        }
     }
 
 }
