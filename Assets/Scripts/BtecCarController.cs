@@ -5,6 +5,7 @@ using UnityEngine;
 public class BtecCarController : MonoBehaviour
 {
     public float speed;
+    float startSpeed;
     public float laneChangeSpeed;
     public int lane;
     public bool isAlive = true;
@@ -16,6 +17,9 @@ public class BtecCarController : MonoBehaviour
     float cooldown = 0;
     public float cooldownMax;
     float timeAlive = 0;
+    public int cassettes;
+    public GameObject cassPart;
+    public LeanTweenType curve;
 
 
     void Awake()
@@ -23,13 +27,17 @@ public class BtecCarController : MonoBehaviour
         isAlive = true;
         lane = 1;
         cooldown = cooldownMax;
+        cassettes = 0;
+        startSpeed = speed;
     }
 
     void Update()
     {
+        //need to change movement so that you go to the left as soon as A is pressed and same with right and D, even if you're midway through going to a different lane
 
         if (isAlive)
         {
+            cooldownMax = laneChangeSpeed * (speed / startSpeed) + 0.001f;
             //could cap speed
             timeAlive += Time.deltaTime / 10000;
             speed = speed + timeAlive;
@@ -54,19 +62,15 @@ public class BtecCarController : MonoBehaviour
         }
         if (left)
         {
-            this.transform.position = new Vector3(Mathf.Lerp(this.transform.position.x, gotohere, laneChangeSpeed), this.transform.position.y, this.transform.position.z);
-            if (this.transform.position.x <= gotohere * 0.95f)
-            {
-                left = false;
-            }
+            // this.transform.position = new Vector3(Mathf.Lerp(this.transform.position.x, gotohere, laneChangeSpeed), this.transform.position.y, this.transform.position.z);
+            LeanTween.moveX(this.gameObject, gotohere, laneChangeSpeed * (speed / startSpeed)).setEase(curve);
+            left = false;
         }
         if (right)
         {
-            this.transform.position = new Vector3(Mathf.Lerp(this.transform.position.x, gotohere, laneChangeSpeed), this.transform.position.y, this.transform.position.z);
-            if (this.transform.position.x >= gotohere * 0.95f)
-            {
-                right = false;
-            }
+            // this.transform.position = new Vector3(Mathf.Lerp(this.transform.position.x, gotohere, laneChangeSpeed), this.transform.position.y, this.transform.position.z);
+            LeanTween.moveX(this.gameObject, gotohere, laneChangeSpeed * (speed / startSpeed)).setEase(curve);
+            right = false;
         }
     }
 
@@ -80,7 +84,11 @@ public class BtecCarController : MonoBehaviour
         }
         if (col.gameObject.name == "CassetteTape(Clone)")
         {
+
             Destroy(col.gameObject);
+            GameObject part = Instantiate(cassPart, col.transform.position, col.transform.rotation);
+            cassettes++;
+            ui.UpdateCassettes(cassettes);
         }
 
     }

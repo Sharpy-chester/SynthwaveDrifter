@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour
 {
     public Text distance;
     public Text gameOver;
+    public Text cassettesTxt;
     public Button startAgain;
     public Transform car;
     public BtecCarController carController;
@@ -15,9 +16,11 @@ public class UIManager : MonoBehaviour
     float dist;
     float time;
 
+
     void Awake()
     {
         carSpeed = carController.speed;
+        cassettesTxt.text = "Cassettes: 0";
     }
 
     void Update()
@@ -42,5 +45,11 @@ public class UIManager : MonoBehaviour
         time = 0;
         SceneManager.LoadScene("SampleScene");
 
+    }
+
+    public void UpdateCassettes(int cass)
+    {
+        //could have just added one every time this is called, but might want a cassette thats worth more than one. Also could have asked for an int to add as an input but theres little performance difference and this way is more reliable
+        cassettesTxt.text = "Cassettes: " + cass;
     }
 }

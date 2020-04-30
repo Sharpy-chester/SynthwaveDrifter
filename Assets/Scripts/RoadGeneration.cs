@@ -22,6 +22,7 @@ public class RoadGeneration : MonoBehaviour
     public float obsticleHeight = 0.55f;
     public BtecCarController carController;
     public GameObject cassManager;
+    GameObject newRoad;
 
     void Awake()
     {
@@ -41,7 +42,7 @@ public class RoadGeneration : MonoBehaviour
         if (carTrans.localPosition.z > latestRoadEnd.localPosition.x)
         {
             Vector3 spawnPos = new Vector3(0, 0, 0);
-            GameObject newRoad = Instantiate(roadTypes[Random.Range(0, 1)]);
+            newRoad = Instantiate(roadTypes[Random.Range(0, 1)]);
             //change to random.range(0, 3) for curvy bois
 
             newRoad.transform.parent = latestRoadEnd;
@@ -51,6 +52,10 @@ public class RoadGeneration : MonoBehaviour
             newRoad.transform.localPosition = new Vector3(0, 0, distBetweenRoads);
             newRoad.transform.localEulerAngles = new Vector3(0, 0, 0);
             newRoad.transform.parent = null;
+            if (carController.isAlive)
+            {
+                Destroy(newRoad, 10f);
+            }
             latestRoad = newRoad;
             changeLatest = true;
             carTrans.parent = latestRoad.transform;
