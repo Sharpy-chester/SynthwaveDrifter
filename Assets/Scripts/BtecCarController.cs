@@ -20,6 +20,11 @@ public class BtecCarController : MonoBehaviour
     float[] laneX = { -2.1f, 0, 2.1f };
     float desiredPos;
     LTDescr lean;
+    bool swipeRight;
+    bool swipeLeft;
+    float swipeStartTime;
+    Vector3 startPos;
+    public float minSwipeDist = 0.2f;
     void Awake()
     {
         isAlive = true;
@@ -37,14 +42,15 @@ public class BtecCarController : MonoBehaviour
                 speed = speed + timeAlive * 2;
             }
             this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z + speed * Time.deltaTime);
-            if (Input.GetKeyDown(KeyCode.D) && lane < 2)
+            SwipeDetection();
+            if ((Input.GetKeyDown(KeyCode.D) || swipeRight) && lane < 2)
             {
                 lane++;
                 right = true;
                 left = false;
                 LeanTween.cancel(this.gameObject);
             }
-            else if (Input.GetKeyDown(KeyCode.A) && lane > 0)
+            else if ((Input.GetKeyDown(KeyCode.A) || swipeLeft) && lane > 0)
             {
                 lane--;
                 left = true;
@@ -78,6 +84,36 @@ public class BtecCarController : MonoBehaviour
             GameObject part = Instantiate(cassPart, col.transform.position, col.transform.rotation);
             cassettes++;
             ui.UpdateCassettes(cassettes);
+        }
+    }
+
+    void SwipeDetection()
+    {
+        swipeLeft = false;
+        swipeRight = false;
+        if (Input.touches.Length > 0)
+        {
+            Touch uwu = Input.GetTouch(0);
+            if (uwu.phase == TouchPhase.Began)
+            {
+                startPos = new Vector2(uwu.position.x / Screen.width, uwu.position.y / Screen.width);
+                swipeStartTime = Time.time;
+            }
+            if (uwu.phase == TouchPhase.Ended)
+            {
+                Vector2 endPos = new Vector2(uwu.position.x / Screen.width, uwu.position.y / Screen.width);
+                Vector2 swipe = new Vector2(endPos.x - startPos.x, endPos.y - startPos.y);
+                if (swipe.magnitude < minSwipeDist)
+                    return;
+                if (swipe.x > 0)
+                {
+                    swipeRight = true;
+                }
+                else
+                {
+                    swipeLeft = true;
+                }
+            }
         }
     }
 }
