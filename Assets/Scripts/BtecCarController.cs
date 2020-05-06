@@ -5,75 +5,64 @@ using UnityEngine;
 public class BtecCarController : MonoBehaviour
 {
     public float speed;
-    float startSpeed;
+    public float maxSpeed;
     public float laneChangeSpeed;
     public int lane;
     public bool isAlive = true;
-    public float laneDist = 3;
     public UIManager ui;
     public bool left = false;
     public bool right = false;
-    public float gotohere = 0;
-    float cooldown = 0;
-    public float cooldownMax;
+    public float gotoX;
     float timeAlive = 0;
     public int cassettes;
     public GameObject cassPart;
     public LeanTweenType curve;
-
-
+    float[] laneX = { -2.1f, 0, 2.1f };
+    float desiredPos;
+    LTDescr lean;
     void Awake()
     {
         isAlive = true;
         lane = 1;
-        cooldown = cooldownMax;
         cassettes = 0;
-        startSpeed = speed;
     }
-
     void Update()
     {
-        //need to change movement so that you go to the left as soon as A is pressed and same with right and D, even if you're midway through going to a different lane
-
         if (isAlive)
         {
-            cooldownMax = laneChangeSpeed * (speed / startSpeed) + 0.001f;
-            //could cap speed
             timeAlive += Time.deltaTime / 10000;
-            speed = speed + timeAlive;
-            cooldown += Time.deltaTime;
+            if (speed < maxSpeed)
+            {
+                // laneChangeSpeed = laneChangeSpeed - timeAlive / 20;
+                speed = speed + timeAlive * 2;
+            }
             this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z + speed * Time.deltaTime);
-            if (Input.GetKey(KeyCode.A) && lane > 0 && cooldown >= cooldownMax)
+            if (Input.GetKeyDown(KeyCode.D) && lane < 2)
             {
-                this.transform.position = new Vector3(gotohere, this.transform.position.y, this.transform.position.z);
-                gotohere = this.transform.position.x - laneDist;
-                left = true;
-                lane--;
-                cooldown = 0;
-            }
-            if (Input.GetKey(KeyCode.D) && lane < 2 && cooldown >= cooldownMax)
-            {
-                this.transform.position = new Vector3(gotohere, this.transform.position.y, this.transform.position.z);
-                gotohere = this.transform.position.x + laneDist;
-                right = true;
                 lane++;
-                cooldown = 0;
+                right = true;
+                left = false;
+                LeanTween.cancel(this.gameObject);
             }
-        }
-        if (left)
-        {
-            // this.transform.position = new Vector3(Mathf.Lerp(this.transform.position.x, gotohere, laneChangeSpeed), this.transform.position.y, this.transform.position.z);
-            LeanTween.moveX(this.gameObject, gotohere, laneChangeSpeed * (speed / startSpeed)).setEase(curve);
-            left = false;
-        }
-        if (right)
-        {
-            // this.transform.position = new Vector3(Mathf.Lerp(this.transform.position.x, gotohere, laneChangeSpeed), this.transform.position.y, this.transform.position.z);
-            LeanTween.moveX(this.gameObject, gotohere, laneChangeSpeed * (speed / startSpeed)).setEase(curve);
-            right = false;
+            else if (Input.GetKeyDown(KeyCode.A) && lane > 0)
+            {
+                lane--;
+                left = true;
+                right = false;
+                LeanTween.cancel(this.gameObject);
+            }
+
+            if (right || left)
+            {
+                print("ShouldWork");
+                desiredPos = laneX[lane];
+                // this.transform.position = new Vector3(Mathf.Lerp(this.transform.position.x, desiredPos, laneChangeSpeed), this.transform.position.y, this.transform.position.z);
+                lean = LeanTween.moveLocalX(this.gameObject, desiredPos, laneChangeSpeed);
+                right = false;
+                left = false;
+            }
         }
     }
-
     void OnCollisionEnter(Collision col)
     {
         if (col.gameObject.name == "Obstacle(Clone)")
@@ -90,6 +79,5 @@ public class BtecCarController : MonoBehaviour
             cassettes++;
             ui.UpdateCassettes(cassettes);
         }
-
     }
 }

@@ -501,41 +501,6 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
---- !u!114 &902137517
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8654805506216731891}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c8ff3f817a7cf0478ab8d7f8d133712, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 20
-  laneChangeSpeed: 0.05
-  lane: 1
-  isAlive: 1
-  laneDist: 4
-  ui: {fileID: 0}
-  left: 0
-  right: 0
-  gotohere: 0
-  cooldownMax: 0.35
---- !u!65 &8999109225267694036
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8654805506216731891}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1.1964178, z: 0.6543884}
-  m_Center: {x: 0, y: 0.7396083, z: 3.4782143}
 --- !u!64 &7799345
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -550,6 +515,49 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -8782446530233610413, guid: c56cf578a5cbeb94b8491a4f25f15e88, type: 3}
+--- !u!65 &8999109225267694036
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8654805506216731891}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.1964178, z: 0.6543884}
+  m_Center: {x: 0, y: 0.7396083, z: 3.4782143}
+--- !u!114 &902137517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8654805506216731891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c8ff3f817a7cf0478ab8d7f8d133712, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 20
+  maxSpeed: 80
+  laneChangeTime: 0.3
+  minLaneChangeTime: 0.1
+  laneChangeTimeChangeTime: 0.3
+  lane: 1
+  isAlive: 1
+  laneDist: 3.8
+  ui: {fileID: 0}
+  left: 0
+  right: 0
+  gotohere: 0
+  cooldown: 0
+  cooldownMax: 0.41
+  cassettes: 0
+  cassPart: {fileID: 3682781483038152148, guid: 0d7d15fe302fb28498ca3a7266adce7a,
+    type: 3}
+  curve: 35
 --- !u!1001 &8655784622779986153
 PrefabInstance:
   m_ObjectHideFlags: 0

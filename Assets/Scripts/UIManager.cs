@@ -6,21 +6,24 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
-    public Text distance;
+
+    public Text scoreTxt;
     public Text gameOver;
-    public Text cassettesTxt;
     public Button startAgain;
     public Transform car;
     public BtecCarController carController;
     float carSpeed;
     float dist;
     float time;
+    float score;
+    public int cassettes;
+    public float cassModifier;
 
 
     void Awake()
     {
         carSpeed = carController.speed;
-        cassettesTxt.text = "Cassettes: 0";
+
     }
 
     void Update()
@@ -29,9 +32,9 @@ public class UIManager : MonoBehaviour
         {
             time += Time.deltaTime;
             dist = carSpeed * time;
-            distance.text = "Distance: " + Mathf.Round(dist);
+            score = dist + (cassettes * cassModifier);
+            scoreTxt.text = Mathf.Round(score).ToString();
         }
-
     }
 
     public void GameOver()
@@ -50,6 +53,6 @@ public class UIManager : MonoBehaviour
     public void UpdateCassettes(int cass)
     {
         //could have just added one every time this is called, but might want a cassette thats worth more than one. Also could have asked for an int to add as an input but theres little performance difference and this way is more reliable
-        cassettesTxt.text = "Cassettes: " + cass;
+        cassettes = cass;
     }
 }

@@ -23,6 +23,7 @@ public class RoadGeneration : MonoBehaviour
     public BtecCarController carController;
     public GameObject cassManager;
     GameObject newRoad;
+    int howManyRoadsYaWannaLoad = 12;
 
     void Awake()
     {
@@ -39,7 +40,7 @@ public class RoadGeneration : MonoBehaviour
     {
         carpos = carTrans.localPosition;
         endpos = latestRoadEnd.localPosition;
-        if (carTrans.localPosition.z > latestRoadEnd.localPosition.x)
+        if (carTrans.localPosition.z + (distBetweenRoads * howManyRoadsYaWannaLoad) > latestRoadEnd.localPosition.x)
         {
             Vector3 spawnPos = new Vector3(0, 0, 0);
             newRoad = Instantiate(roadTypes[Random.Range(0, 1)]);
@@ -54,7 +55,7 @@ public class RoadGeneration : MonoBehaviour
             newRoad.transform.parent = null;
             if (carController.isAlive)
             {
-                Destroy(newRoad, 10f);
+                Destroy(newRoad, 20f);
             }
             latestRoad = newRoad;
             changeLatest = true;
@@ -100,11 +101,9 @@ public class RoadGeneration : MonoBehaviour
             {
 
                 GameObject cass = Instantiate(cassManager, new Vector3(0, 1.5f, 0), cassManager.transform.rotation);
-                print(cass.transform.position);
                 cass.transform.parent = end;
                 cass.transform.localPosition = new Vector3(2.1f * i - 2.1f, cass.transform.localPosition.y, 0);
                 cass.transform.parent = latestRoad.transform;
-                print(cass.transform.position);
             }
         }
     }
