@@ -1954,7 +1954,7 @@ GameObject:
   - component: {fileID: 7197847823135563144}
   - component: {fileID: 7197847823135563145}
   m_Layer: 0
-  m_Name: RoadLeft 1
+  m_Name: RoadLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2002,7 +2002,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bd67c39ae368242a4ad2e18466bc3e93, type: 2}
+  - {fileID: 2100000, guid: c0afa8101066a344b836783487c2e3ce, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

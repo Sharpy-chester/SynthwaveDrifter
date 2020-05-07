@@ -58,10 +58,6 @@ public class MainMenu : MonoBehaviour
         thisNextPls.transform.localPosition = new Vector3(950, 0, 0);
         LeanTween.moveX(thisNextPls, 800, swapTime);
     }
-    public void Main()
-    {
-        // LeanTween.moveX(master, 0, swapTime).setEaseInOutBack();
-    }
     public void NextCar()
     {
         //could make this foreach just to be last carnum-1. Want the script to work first. Can do this later for optimisation.
@@ -82,7 +78,7 @@ public class MainMenu : MonoBehaviour
         }
         carNum--;
         if (carNum < 0)
-            carNum = cars.Length;
+            carNum = cars.Length - 1;
         cars[carNum].SetActive(true);
     }
 }
