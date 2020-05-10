@@ -17,7 +17,7 @@ public class BtecCarController : MonoBehaviour
     public int cassettes;
     public GameObject cassPart;
     public LeanTweenType curve;
-    float[] laneX = { -2.1f, 0, 2.1f };
+    float[] laneX = { -4.2f, 0, 4.2f };
     float desiredPos;
     LTDescr lean;
     bool swipeRight;
@@ -25,6 +25,13 @@ public class BtecCarController : MonoBehaviour
     float swipeStartTime;
     Vector3 startPos;
     public float minSwipeDist = 0.2f;
+    bool canRegTouchMovement = true;
+    public GameManager manager;
+    float distance = 0;
+    float time = 0;
+    float score = 0;
+
+
     void Awake()
     {
         isAlive = true;
@@ -35,6 +42,9 @@ public class BtecCarController : MonoBehaviour
     {
         if (isAlive)
         {
+            time += Time.deltaTime;
+            distance = speed * time;
+            score = Mathf.Round(distance) + (cassettes * ui.cassModifier);
             timeAlive += Time.deltaTime / 10000;
             if (speed < maxSpeed)
             {
@@ -75,6 +85,7 @@ public class BtecCarController : MonoBehaviour
         {
             speed = 0;
             isAlive = false;
+            manager.UpdateValues(cassettes, score);
             ui.GameOver();
         }
         if (col.gameObject.name == "CassetteTape(Clone)")
@@ -83,6 +94,7 @@ public class BtecCarController : MonoBehaviour
             Destroy(col.gameObject);
             GameObject part = Instantiate(cassPart, col.transform.position, col.transform.rotation);
             cassettes++;
+
             ui.UpdateCassettes(cassettes);
         }
     }
@@ -99,7 +111,7 @@ public class BtecCarController : MonoBehaviour
                 startPos = new Vector2(uwu.position.x / Screen.width, uwu.position.y / Screen.width);
                 swipeStartTime = Time.time;
             }
-            if (uwu.phase == TouchPhase.Ended)
+            if (uwu.phase == TouchPhase.Moved && canRegTouchMovement)
             {
                 Vector2 endPos = new Vector2(uwu.position.x / Screen.width, uwu.position.y / Screen.width);
                 Vector2 swipe = new Vector2(endPos.x - startPos.x, endPos.y - startPos.y);
@@ -113,6 +125,11 @@ public class BtecCarController : MonoBehaviour
                 {
                     swipeLeft = true;
                 }
+                canRegTouchMovement = false;
+            }
+            if (uwu.phase == TouchPhase.Ended)
+            {
+                canRegTouchMovement = true;
             }
         }
     }

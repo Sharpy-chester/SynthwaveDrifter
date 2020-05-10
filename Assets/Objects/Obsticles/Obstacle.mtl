@@ -1,0 +1,5 @@
+newmtl grid_256_thick
+map_Kd grid_256_thick.png
+Kd 1 1 1
+d 1
+

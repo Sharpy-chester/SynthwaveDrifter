@@ -11,7 +11,7 @@ public class RoadGeneration : MonoBehaviour
     public Transform latestRoadStart;
     Transform latestRoadMiddle;
     public Transform latestRoadEnd;
-    public float distBetweenRoads = 21;
+    const float distBetweenRoads = 90;
     bool changeLatest = false;
     public Vector3 carpos;
     public Vector3 endpos;
@@ -23,52 +23,31 @@ public class RoadGeneration : MonoBehaviour
     public BtecCarController carController;
     public GameObject cassManager;
     GameObject newRoad;
-    int howManyRoadsYaWannaLoad = 12;
+    public int howManyRoadsYaWannaLoad = 12;
+    Vector3 newRoadHere;
 
     void Awake()
     {
-
         //yes, i know this is a dumb, unoptimised way to do this. I'll fix it later. Chill
         latestRoad = GameObject.FindGameObjectWithTag("Road");
         latestRoadStart = GameObject.Find("RoadStraightStart").transform;
         latestRoadMiddle = GameObject.Find("RoadStraightMiddle").transform;
         latestRoadEnd = GameObject.Find("RoadStraightEnd").transform;
-        carTrans.parent = latestRoad.transform;
     }
 
     void Update()
     {
         carpos = carTrans.localPosition;
         endpos = latestRoadEnd.localPosition;
-        if (carTrans.localPosition.z + (distBetweenRoads * howManyRoadsYaWannaLoad) > latestRoadEnd.localPosition.x)
+        if (carTrans.localPosition.z + (distBetweenRoads * howManyRoadsYaWannaLoad) > (latestRoad.transform.localPosition.z))
         {
-            Vector3 spawnPos = new Vector3(0, 0, 0);
-            newRoad = Instantiate(roadTypes[Random.Range(0, 1)]);
-            //change to random.range(0, 3) for curvy bois
-
-            newRoad.transform.parent = latestRoadEnd;
-            //, spawnPos, rot.rotation
-
-
-            newRoad.transform.localPosition = new Vector3(0, 0, distBetweenRoads);
-            newRoad.transform.localEulerAngles = new Vector3(0, 0, 0);
-            newRoad.transform.parent = null;
-            if (carController.isAlive)
-            {
-                Destroy(newRoad, 20f);
-            }
+            newRoadHere = new Vector3(latestRoad.transform.position.x, latestRoad.transform.position.y, latestRoad.transform.position.z + distBetweenRoads);
+            newRoad = Instantiate(roadTypes[0], newRoadHere, latestRoad.transform.rotation);
             latestRoad = newRoad;
-            changeLatest = true;
-            carTrans.parent = latestRoad.transform;
-            // Destroy(latestRoad, 10f);
-        }
-        if (changeLatest)
-        {
             latestRoadEnd = latestRoad.transform.Find("RoadStraightEnd");
             latestRoadMiddle = latestRoad.transform.Find("RoadStraightMiddle");
-            latestRoadStart = latestRoad.transform;
+            latestRoadStart = latestRoad.transform.Find("RoadStraightStart");
             CreateObstacles(latestRoadStart, latestRoadMiddle, latestRoadEnd);
-            changeLatest = false;
         }
     }
 
@@ -102,7 +81,8 @@ public class RoadGeneration : MonoBehaviour
 
                 GameObject cass = Instantiate(cassManager, new Vector3(0, 1.5f, 0), cassManager.transform.rotation);
                 cass.transform.parent = end;
-                cass.transform.localPosition = new Vector3(2.1f * i - 2.1f, cass.transform.localPosition.y, 0);
+                cass.transform.position = new Vector3(start.position.x + (4.2f * i - 4.2f), cass.transform.position.y, end.position.z);
+
                 cass.transform.parent = latestRoad.transform;
             }
         }

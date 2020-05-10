@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 public class MainMenu : MonoBehaviour
 {
     public BtecCarController carController;
@@ -15,6 +16,10 @@ public class MainMenu : MonoBehaviour
     int carNum = 0;
     int pageNum = 0;
     public GameObject[] pages;
+    public Text cassTxt;
+    public Text highScore;
+    int score;
+    public GameManager manager;
 
 
     void Awake()
@@ -22,6 +27,8 @@ public class MainMenu : MonoBehaviour
         carController.enabled = false;
         roadGenerator.enabled = false;
         ui.gameObject.SetActive(false);
+        cassTxt.text = "Cassettes: " + manager.cassettes;
+        highScore.text = "High Score: " + manager.highScore;
     }
 
     public void Play()
@@ -33,31 +40,7 @@ public class MainMenu : MonoBehaviour
         this.gameObject.SetActive(false);
     }
 
-    public void CustomisationBtnClicked()
-    {
-        ComeIn(customisation);
-        yeet(MainPage);
-        pageNum = 1;
-    }
-    public void HomeBtnClicked()
-    {
-        ComeIn(MainPage);
-        yeet(pages[pageNum]);
-        pageNum = 0;
-    }
-    public void AnimEnded()
-    {
-        animator.SetBool("change", false);
-    }
-    void yeet(GameObject yeetThisPls)
-    {
-        LeanTween.moveX(yeetThisPls, -800, swapTime);
-    }
-    void ComeIn(GameObject thisNextPls)
-    {
-        thisNextPls.transform.localPosition = new Vector3(950, 0, 0);
-        LeanTween.moveX(thisNextPls, 800, swapTime);
-    }
+
     public void NextCar()
     {
         //could make this foreach just to be last carnum-1. Want the script to work first. Can do this later for optimisation.

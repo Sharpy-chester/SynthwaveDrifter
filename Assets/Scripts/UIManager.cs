@@ -15,7 +15,7 @@ public class UIManager : MonoBehaviour
     float carSpeed;
     float dist;
     float time;
-    float score;
+    public float score;
     public int cassettes;
     public float cassModifier;
 

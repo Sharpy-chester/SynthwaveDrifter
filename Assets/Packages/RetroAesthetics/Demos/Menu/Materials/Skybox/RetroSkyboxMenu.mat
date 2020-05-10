@@ -24,7 +24,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _CubemapTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 8900000, guid: a21abf077d99ae44db96bd810479d2fb, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -82,16 +82,16 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _StripesDistance: 0.009
-    - _StripesExponent1: 3.26
+    - _StripesDistance: 0.0048
+    - _StripesExponent1: 2.85
     - _StripesExponent2: 4.58
-    - _StripesHeight: 0.5
+    - _StripesHeight: 0.512
     - _StripesSpeed: 0.25
-    - _StripesWidth: 0.0022
+    - _StripesWidth: 0.0016
     - _SunEnabled: 1
     - _SunExponent: 5.3
-    - _SunPitch: 76
-    - _SunSize: 0.0068
+    - _SunPitch: 95
+    - _SunSize: 0.0023
     - _SunYaw: 180
     - _UVSec: 0
     - _ZWrite: 1
@@ -108,5 +108,5 @@ Material:
     - _ColorSun2: {r: 0.120120525, g: 1, b: 0, a: 0}
     - _Direction: {r: 0.47238398, g: 0.22495104, b: 0.85220325, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _SunDirection: {r: -0.00000008482595, g: 0.2419219, b: -0.9702957, a: 0}
-    - _SunDirectionP: {r: -0.00000002114948, g: -0.9702957, b: -0.24192186, a: 0}
+    - _SunDirection: {r: -0.00000008709011, g: -0.08715577, b: -0.9961947, a: 0}
+    - _SunDirectionP: {r: 0.000000007619403, g: -0.9961947, b: 0.08715581, a: 0}
