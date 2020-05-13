@@ -18,8 +18,10 @@ public class MainMenu : MonoBehaviour
     public GameObject[] pages;
     public Text cassTxt;
     public Text highScore;
+    public Text buyTxt;
     int score;
     public GameManager manager;
+    public Car[] carSO;
 
 
     void Awake()
@@ -29,15 +31,34 @@ public class MainMenu : MonoBehaviour
         ui.gameObject.SetActive(false);
         cassTxt.text = "Cassettes: " + manager.cassettes;
         highScore.text = "High Score: " + manager.highScore;
+        UpdateCurrentCarUI();
+    }
+    public void UpdateCurrentCarUI()
+    {
+        Car car = carSO[carNum];
+        if (car.unlocked)
+        {
+            buyTxt.text = "Unlocked";
+            buyTxt.fontSize = 64;
+        }
+        else
+        {
+            buyTxt.text = "Buy for " + car.cassNeeded + " cassettes";
+            buyTxt.fontSize = 52;
+        }
     }
 
     public void Play()
     {
-        animator.SetBool("change", true);
-        carController.enabled = true;
-        roadGenerator.enabled = true;
-        ui.gameObject.SetActive(true);
-        this.gameObject.SetActive(false);
+        if (carSO[carNum].unlocked) //if the selected car is unlocked
+        {
+            animator.SetBool("change", true);
+            carController.enabled = true;
+            roadGenerator.enabled = true;
+            ui.gameObject.SetActive(true);
+            this.gameObject.SetActive(false);
+        }
+
     }
 
 
@@ -52,6 +73,7 @@ public class MainMenu : MonoBehaviour
         if (carNum > cars.Length - 1)
             carNum = 0;
         cars[carNum].SetActive(true);
+        UpdateCurrentCarUI();
     }
     public void LastCar()
     {
@@ -63,5 +85,16 @@ public class MainMenu : MonoBehaviour
         if (carNum < 0)
             carNum = cars.Length - 1;
         cars[carNum].SetActive(true);
+        UpdateCurrentCarUI();
+    }
+    public void buyCar()
+    {
+        if (manager.cassettes >= carSO[carNum].cassNeeded) //if u have enough cassettes
+        {
+            carSO[carNum].unlocked = true;
+            manager.cassettes -= carSO[carNum].cassNeeded;
+            cassTxt.text = "Cassettes: " + manager.cassettes;
+            UpdateCurrentCarUI();
+        }
     }
 }

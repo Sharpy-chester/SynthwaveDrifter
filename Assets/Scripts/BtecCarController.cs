@@ -70,7 +70,6 @@ public class BtecCarController : MonoBehaviour
 
             if (right || left)
             {
-                print("ShouldWork");
                 desiredPos = laneX[lane];
                 // this.transform.position = new Vector3(Mathf.Lerp(this.transform.position.x, desiredPos, laneChangeSpeed), this.transform.position.y, this.transform.position.z);
                 lean = LeanTween.moveLocalX(this.gameObject, desiredPos, laneChangeSpeed);
