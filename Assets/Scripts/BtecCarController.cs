@@ -17,7 +17,7 @@ public class BtecCarController : MonoBehaviour
     public int cassettes;
     public GameObject cassPart;
     public LeanTweenType curve;
-    float[] laneX = { -4.2f, 0, 4.2f };
+    float[] laneX = { -4.8f, 0, 4.8f };
     float desiredPos;
     LTDescr lean;
     bool swipeRight;
@@ -72,7 +72,7 @@ public class BtecCarController : MonoBehaviour
             {
                 desiredPos = laneX[lane];
                 // this.transform.position = new Vector3(Mathf.Lerp(this.transform.position.x, desiredPos, laneChangeSpeed), this.transform.position.y, this.transform.position.z);
-                lean = LeanTween.moveLocalX(this.gameObject, desiredPos, laneChangeSpeed);
+                lean = LeanTween.moveLocalX(this.gameObject, desiredPos, laneChangeSpeed).setEase(curve);
                 right = false;
                 left = false;
             }
@@ -80,7 +80,7 @@ public class BtecCarController : MonoBehaviour
     }
     void OnCollisionEnter(Collision col)
     {
-        if (col.gameObject.name == "Obstacle(Clone)")
+        if (col.gameObject.CompareTag("Obst"))
         {
             speed = 0;
             isAlive = false;

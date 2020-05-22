@@ -8,14 +8,8 @@ public class MainMenu : MonoBehaviour
     public RoadGeneration roadGenerator;
     public UIManager ui;
     public Animator animator;
-    public GameObject master;
-    public float swapTime = 1f;
     public GameObject[] cars;
-    public GameObject customisation;
-    public GameObject MainPage;
     int carNum = 0;
-    int pageNum = 0;
-    public GameObject[] pages;
     public Text cassTxt;
     public Text highScore;
     public Text buyTxt;
@@ -26,6 +20,7 @@ public class MainMenu : MonoBehaviour
 
     void Awake()
     {
+
         carController.enabled = false;
         roadGenerator.enabled = false;
         ui.gameObject.SetActive(false);
@@ -35,6 +30,12 @@ public class MainMenu : MonoBehaviour
     }
     public void UpdateCurrentCarUI()
     {
+        foreach (Car carso in carSO)
+        {
+            if (bool.TrueString == PlayerPrefs.GetString(carso.carName))
+                carso.unlocked = true;
+        }
+
         Car car = carSO[carNum];
         if (car.unlocked)
         {
@@ -93,8 +94,11 @@ public class MainMenu : MonoBehaviour
         {
             carSO[carNum].unlocked = true;
             manager.cassettes -= carSO[carNum].cassNeeded;
+            PlayerPrefs.SetInt("cass", manager.cassettes);
             cassTxt.text = "Cassettes: " + manager.cassettes;
             UpdateCurrentCarUI();
+            //right, let me explain myself here. There is no playerprefs set bool so ima cast this string into a bool. Is this dumb? Yes. Does it work? Also yes
+            PlayerPrefs.SetString(carSO[carNum].carName, bool.TrueString);
         }
     }
 }

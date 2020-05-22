@@ -53,5 +53,5 @@ MonoBehaviour:
     NumberOfPasses: 3
     BlurAmount: 0.94
     BloomColor: {r: 1, g: 1, b: 1, a: 1}
-    BloomAmount: 0.51
+    BloomAmount: 1.06
     BloomThreshold: 0.067

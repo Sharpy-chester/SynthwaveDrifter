@@ -11,20 +11,21 @@ public class RoadGeneration : MonoBehaviour
     public Transform latestRoadStart;
     Transform latestRoadMiddle;
     public Transform latestRoadEnd;
-    const float distBetweenRoads = 90;
+    const float distBetweenRoads = 108;
     bool changeLatest = false;
     public Vector3 carpos;
     public Vector3 endpos;
     public Transform rot;
-    public GameObject ObstaclePrefab;
-    Vector3 obsticlePosVec3 = new Vector3(-6.25f, -1.725f, 2.8f);
-    float[] obsticlePos = new float[] { -6.25f, -1.725f, 2.8f };
+    public GameObject[] ObstaclePrefab;
+    Vector3 obsticlePosVec3 = new Vector3(-3.4f, -1.725f, 2.8f);
+    float[] obsticlePos = new float[] { -3.4f, 0.12f, 6.5f };
     public float obsticleHeight = 0.55f;
     public BtecCarController carController;
     public GameObject cassManager;
     GameObject newRoad;
     public int howManyRoadsYaWannaLoad = 12;
     Vector3 newRoadHere;
+    public GameObject[] wheels;
 
     void Awake()
     {
@@ -71,7 +72,7 @@ public class RoadGeneration : MonoBehaviour
         {
             if (randyAndy == i || randyAndy2 == i)
             {
-                GameObject obstacle = Instantiate(ObstaclePrefab, new Vector3(obsticlePos[i], obsticleHeight, 0), ObstaclePrefab.transform.rotation);
+                GameObject obstacle = Instantiate(ObstaclePrefab[i], new Vector3(obsticlePos[i], obsticleHeight, 0), ObstaclePrefab[i].transform.rotation);
                 obstacle.transform.parent = end;
                 obstacle.transform.localPosition = new Vector3(obstacle.transform.localPosition.x, obstacle.transform.localPosition.y, 0);
             }
@@ -81,7 +82,7 @@ public class RoadGeneration : MonoBehaviour
 
                 GameObject cass = Instantiate(cassManager, new Vector3(0, 1.5f, 0), cassManager.transform.rotation);
                 cass.transform.parent = end;
-                cass.transform.position = new Vector3(start.position.x + (4.2f * i - 4.2f), cass.transform.position.y, end.position.z);
+                cass.transform.position = new Vector3(start.position.x + (4.8f * i - 4.8f), cass.transform.position.y, end.position.z);
 
                 cass.transform.parent = latestRoad.transform;
             }

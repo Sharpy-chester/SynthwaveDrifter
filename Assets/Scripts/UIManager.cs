@@ -19,19 +19,12 @@ public class UIManager : MonoBehaviour
     public int cassettes;
     public float cassModifier;
 
-
-    void Awake()
-    {
-        carSpeed = carController.speed;
-
-    }
-
     void Update()
     {
         if (carController.isAlive)
         {
             time += Time.deltaTime;
-            dist = carSpeed * time;
+            dist = carController.speed * time;
             score = dist + (cassettes * cassModifier);
             scoreTxt.text = Mathf.Round(score).ToString();
         }

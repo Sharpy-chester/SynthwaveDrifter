@@ -10,9 +10,10 @@ public class CassetteManager : MonoBehaviour
     public float rotSpeed;
     public LeanTweenType curve;
     public GameObject cassPrefab;
-    public GameObject[] cassettes;
-    public int cassAmt = 5;
-    public float cassSpacing = 3f;
+    GameObject[] cassettes;
+
+    [SerializeField] int cassAmt = 5;
+    [SerializeField] float cassSpacing = 3f;
 
     void Awake()
     {
