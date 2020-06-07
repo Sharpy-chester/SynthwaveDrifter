@@ -50,8 +50,8 @@ MonoBehaviour:
   settings:
     Event: 500
     blitMaterial: {fileID: 2100000, guid: 86d20c2c4ae4e9448831fab009e3f968, type: 2}
-    NumberOfPasses: 3
-    BlurAmount: 0.94
+    NumberOfPasses: 4
+    BlurAmount: 0.86
     BloomColor: {r: 1, g: 1, b: 1, a: 1}
-    BloomAmount: 1.06
-    BloomThreshold: 0.067
+    BloomAmount: 0.46
+    BloomThreshold: 1

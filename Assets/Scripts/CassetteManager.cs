@@ -5,11 +5,11 @@ using UnityEngine;
 public class CassetteManager : MonoBehaviour
 {
 
-    public float gotoY;
-    public float bobSpeed;
-    public float rotSpeed;
-    public LeanTweenType curve;
-    public GameObject cassPrefab;
+    [SerializeField] float gotoY;
+    [SerializeField] float bobSpeed;
+    [SerializeField] float rotSpeed;
+    [SerializeField] LeanTweenType curve;
+    [SerializeField] GameObject cassPrefab;
     GameObject[] cassettes;
 
     [SerializeField] int cassAmt = 5;

@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class BtecCarController : MonoBehaviour
 {
-    public float speed;
-    public float maxSpeed;
-    public float laneChangeSpeed;
-    public int lane;
-    public bool isAlive = true;
-    public UIManager ui;
-    public bool left = false;
-    public bool right = false;
-    public float gotoX;
-    float timeAlive = 0;
-    public int cassettes;
-    public GameObject cassPart;
-    public LeanTweenType curve;
+    [SerializeField] private float speed;
+    public float Speed => speed;
+    [SerializeField] float maxSpeed;
+    [SerializeField] float laneChangeSpeed;
+    int lane;
+    bool isAlive = true;
+    public bool IsAlive => isAlive;
+    [SerializeField] UIManager ui;
+    bool left = false;
+    bool right = false;
+    int cassettes;
+    [SerializeField] GameObject cassPart;
+    [SerializeField] LeanTweenType curve;
     float[] laneX = { -4.8f, 0, 4.8f };
     float desiredPos;
     LTDescr lean;
@@ -24,12 +24,14 @@ public class BtecCarController : MonoBehaviour
     bool swipeLeft;
     float swipeStartTime;
     Vector3 startPos;
-    public float minSwipeDist = 0.2f;
+    float timeAlive = 0;
+    [SerializeField] float minSwipeDist = 0.2f;
     bool canRegTouchMovement = true;
-    public GameManager manager;
+    [SerializeField] GameManager manager;
     float distance = 0;
     float time = 0;
     float score = 0;
+    public Vector3 CarPos => this.transform.localPosition;
 
 
     void Awake()
@@ -44,7 +46,7 @@ public class BtecCarController : MonoBehaviour
         {
             time += Time.deltaTime;
             distance = speed * time;
-            score = Mathf.Round(distance) + (cassettes * ui.cassModifier);
+            score = Mathf.Round(distance) + (cassettes * ui.CassModifier);
             timeAlive += Time.deltaTime / 10000;
             if (speed < maxSpeed)
             {

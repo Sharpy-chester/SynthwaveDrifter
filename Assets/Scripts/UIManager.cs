@@ -7,24 +7,24 @@ using UnityEngine.SceneManagement;
 public class UIManager : MonoBehaviour
 {
 
-    public Text scoreTxt;
-    public Text gameOver;
-    public Button startAgain;
-    public Transform car;
-    public BtecCarController carController;
-    float carSpeed;
+    [SerializeField] Text scoreTxt;
+    [SerializeField] Text gameOver;
+    [SerializeField] Button startAgain;
+    [SerializeField] BtecCarController carController;
     float dist;
     float time;
-    public float score;
-    public int cassettes;
-    public float cassModifier;
+    [SerializeField] float score;
+    [SerializeField] int cassettes;
+    float cassModifier;
+    public float CassModifier => cassModifier;
+
 
     void Update()
     {
-        if (carController.isAlive)
+        if (carController.IsAlive)
         {
             time += Time.deltaTime;
-            dist = carController.speed * time;
+            dist = carController.Speed * time;
             score = dist + (cassettes * cassModifier);
             scoreTxt.text = Mathf.Round(score).ToString();
         }

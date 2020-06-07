@@ -5,8 +5,9 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public int cassettes;
-    public float highScore;
-    public UIManager ui;
+    float highScore;
+    public float HighScore => highScore;
+    [SerializeField] UIManager ui;
 
     void Awake()
     {

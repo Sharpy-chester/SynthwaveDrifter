@@ -4,28 +4,25 @@ using UnityEngine;
 using UnityEngine.UI;
 public class MainMenu : MonoBehaviour
 {
-    public BtecCarController carController;
-    public RoadGeneration roadGenerator;
-    public UIManager ui;
-    public Animator animator;
-    public GameObject[] cars;
+    [SerializeField] BtecCarController carController;
+    [SerializeField] RoadGeneration roadGenerator;
+    [SerializeField] UIManager ui;
+    [SerializeField] Animator animator;
+    [SerializeField] GameObject[] cars;
     int carNum = 0;
     public Text cassTxt;
     public Text highScore;
     public Text buyTxt;
-    int score;
     public GameManager manager;
-    public Car[] carSO;
-
+    [SerializeField] Car[] carSO;
 
     void Awake()
     {
-
         carController.enabled = false;
         roadGenerator.enabled = false;
         ui.gameObject.SetActive(false);
         cassTxt.text = "Cassettes: " + manager.cassettes;
-        highScore.text = "High Score: " + manager.highScore;
+        highScore.text = "High Score: " + manager.HighScore;
         UpdateCurrentCarUI();
     }
     public void UpdateCurrentCarUI()

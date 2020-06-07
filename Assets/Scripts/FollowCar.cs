@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FollowCar : MonoBehaviour
 {
-    public Transform car;
+    [SerializeField] Transform car;
 
     void LateUpdate()
     {

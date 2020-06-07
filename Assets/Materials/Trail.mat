@@ -123,14 +123,14 @@ Material:
     - _UseUIAlphaClip: 0
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _BaseColor: {r: 0, g: 0.9817288, b: 1, a: 1}
     - _BaseColorAddSubDiff: {r: 0, g: 0, b: 0, a: 0}
     - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Color1: {r: 1, g: 1, b: 0, a: 1}
     - _Color2: {r: 1, g: 0, b: 1, a: 1}
     - _ColorAddSubDiff: {r: 0, g: 0, b: 0, a: 0}
-    - _EmissionColor: {r: 0, g: 4.50294, b: 6.0628653, a: 1}
+    - _EmissionColor: {r: 0, g: 2.5586696, b: 3.4415908, a: 1}
     - _LineColor: {r: 0.09999997, g: 1, b: 0.09999997, a: 1}
     - _MainColor: {r: 0.09999997, g: 0.09999997, b: 0.09999997, a: 1}
     - _ShadowColor: {r: 0, g: 0, b: 0, a: 1}
