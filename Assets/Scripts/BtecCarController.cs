@@ -33,7 +33,6 @@ public class BtecCarController : MonoBehaviour
     float score = 0;
     public Vector3 CarPos => this.transform.localPosition;
 
-
     void Awake()
     {
         isAlive = true;
@@ -42,7 +41,7 @@ public class BtecCarController : MonoBehaviour
     }
     void Update()
     {
-        if (isAlive)
+        if (GameStateManager.CurrentState == GameStateManager.GameState.Playing)
         {
             time += Time.deltaTime;
             distance = speed * time;
@@ -69,7 +68,6 @@ public class BtecCarController : MonoBehaviour
                 right = false;
                 LeanTween.cancel(this.gameObject);
             }
-
             if (right || left)
             {
                 desiredPos = laneX[lane];
@@ -85,21 +83,18 @@ public class BtecCarController : MonoBehaviour
         if (col.gameObject.CompareTag("Obst"))
         {
             speed = 0;
-            isAlive = false;
+            GameStateManager.CurrentState = GameStateManager.GameState.Dead;
             manager.UpdateValues(cassettes, score);
             ui.GameOver();
         }
         if (col.gameObject.name == "CassetteTape(Clone)")
         {
-
             Destroy(col.gameObject);
             GameObject part = Instantiate(cassPart, col.transform.position, col.transform.rotation);
             cassettes++;
-
             ui.UpdateCassettes(cassettes);
         }
     }
-
     void SwipeDetection()
     {
         swipeLeft = false;

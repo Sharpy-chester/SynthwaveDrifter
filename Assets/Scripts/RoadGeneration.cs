@@ -17,7 +17,7 @@ public class RoadGeneration : MonoBehaviour
     GameObject newRoad;
     [SerializeField] int howManyRoadsYaWannaLoad = 12;
     Vector3 newRoadHere;
-    [SerializeField] float obsticleOffset = 5f;
+    [Range(-.5f, -0.3f)] [SerializeField] float obsticleOffset = 2;
 
     void Awake()
     {
@@ -48,9 +48,9 @@ public class RoadGeneration : MonoBehaviour
         for (int i = 0; i < 3; i++)
         {
             int randyAndy = Random.Range(0, 3);
-            GameObject obstacle = Instantiate(ObstaclePrefab[randyAndy], new Vector3(obsticlePos[randyAndy], obsticleHeight, obsticleOffset), ObstaclePrefab[randyAndy].transform.rotation);
+            GameObject obstacle = Instantiate(ObstaclePrefab[randyAndy], new Vector3(obsticlePos[randyAndy], obsticleHeight, 0), ObstaclePrefab[randyAndy].transform.rotation);
             obstacle.transform.parent = end;
-            obstacle.transform.localPosition = new Vector3(obstacle.transform.localPosition.x, obstacle.transform.localPosition.y, i * 0.333f);
+            obstacle.transform.localPosition = new Vector3(obstacle.transform.localPosition.x, obstacle.transform.localPosition.y, (i * 0.333f) + obsticleOffset);
 
         }
         // GameObject cass = Instantiate(cassManager, new Vector3(0, 1.5f, 0), cassManager.transform.rotation);
